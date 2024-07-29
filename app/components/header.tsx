@@ -1,10 +1,19 @@
-"use-client"
-import React from "react";
+"use client";
+import Link from "next/link";
+import React, { useState } from "react";
 
 const PageHeader = () => {
+	const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+	function openMobileMenu() {
+		setMobileMenuOpen(true);
+	}
+	function closeMobileMenu() {
+		setMobileMenuOpen(false);
+	}
 	return (
-		<header className="w-full shadow-sm ">
-			<nav className="flex items-center px-8 py-3 justify-between  font-bold max-w-[1600px] mx-auto">
+		<header className="w-full shadow-sm relative flex flex-col">
+			<nav className="flex items-center lg:px-8 px-2 py-3 justify-between font-bold max-w-[1600px] mx-auto w-full">
 				<ul className="flex content-center justify-center text-center">
 					<li className=" m-2 p-2 flex content-center justify-center">
 						<svg
@@ -53,12 +62,40 @@ const PageHeader = () => {
 					<button className="m-2 py-1 px-4 bg-black text-white rounded-full hover:bg-zinc-600 hidden md:flex">
 						Join Now
 					</button>
-					<li className="md:hidden">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
-  <path fillRule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clipRule="evenodd" />
-</svg>
-
-					</li>
+					<div
+						className={`absolute lg:hidden flex transition duration-200 ${
+							isMobileMenuOpen ? "translate-x-0" : "-translate-x-[100%]"
+						} left-0 top-0 w-screen h-screen bg-white z-30 flex-col space-y-4 pt-6 px-3`}
+					>
+						<div className="flex justify-end">
+							<button
+								onClick={closeMobileMenu}
+								className="font-medium text-black"
+							>
+								X
+							</button>
+						</div>
+						<Link href="#">Home</Link>
+						<Link href="#">About us</Link>
+						<Link href="#">Contact us</Link>
+						<Link href="#">Blog</Link>
+					</div>
+					<button onClick={openMobileMenu} className="ml-auto">
+						<li className="md:hidden flex">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 24 24"
+								fill="currentColor"
+								className="size-6"
+							>
+								<path
+									fillRule="evenodd"
+									d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z"
+									clipRule="evenodd"
+								/>
+							</svg>
+						</li>
+					</button>
 				</ul>
 			</nav>
 		</header>
